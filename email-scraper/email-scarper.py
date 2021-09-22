@@ -5,11 +5,13 @@ import urllib.parse
 from collections import deque
 import re
 
-user_url = str(input('[+] Enter Target URL To Scan: '))
+user_url = str(input('Enter full Target URL To Scan: '))
 urls = deque([user_url])
+# deque to append and pop elements on both ends
 
 scraped_urls = set()
 emails = set()
+# set is a mutable set of immutable items
 
 count = 0
 try:
@@ -19,12 +21,14 @@ try:
             break
         url = urls.popleft()
         scraped_urls.add(url)
+        # Adding the scanned URL to scraped_urls
 
         parts = urllib.parse.urlsplit(url)
+        # urllib.parse will separate the contents of the full url to combine strings back to url
         base_url = '{0.scheme}://{0.netloc}'.format(parts)
 
         path = url[:url.rfind('/')+1] if '/' in parts.path else url
-
+        # rfind is used to get the highest index value in a substring and gives -1 if not found, find is used to find the first substring found from index 0 
         print('[%d] Processing %s' % (count, url))
         try:
             response = requests.get(url)
@@ -44,6 +48,7 @@ try:
                 link = path + link
             if not link in urls and not link in scraped_urls:
                 urls.append(link)
+                
 except KeyboardInterrupt:
     print('[-] Closing!')
 
