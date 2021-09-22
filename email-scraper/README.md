@@ -1,3 +1,4 @@
 ## Email-scraper
-### A python script to get the emails by inputting the website url
-### The url of the website should be in the form https://xxxxx.yyy
+#### A python script to get the emails by inputting the website url
+#### The url of the website should be in the form https://xxxxx.yyy
+#### The number of subdomain urls can be increase by changing the number in count
